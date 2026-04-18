@@ -23,6 +23,7 @@ Produce a prioritized findings report across four dimensions for the given scope
    - **Architecture**: layering, coupling, cycles; Serena is ideal here.
 3. Rank findings by severity × likelihood / effort-to-fix.
 4. Surface the top 3 recommended actions separate from the full list.
+5. **Write incremental notes** to `.claude/scratch/analyze-<date>.md` every N findings so compaction mid-run doesn't lose progress. Resume by reading the scratch file tail.
 
 ## Outputs
 - Severity-ranked findings with `file:line` citations.

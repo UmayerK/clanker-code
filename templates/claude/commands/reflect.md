@@ -1,34 +1,40 @@
 ---
 name: reflect
-description: Validate completed work against stated requirements with semantic code awareness.
-argument-hint: [--depth shallow|normal|deep] [--validate]
+description: Validate completed work with semantic awareness, confidence scoring, and optional parallel reviewers.
+argument-hint: [--depth shallow|normal|deep] [--validate] [--parallel] [--threshold 80] [--uc]
 delegates-to: reviewer
 ---
 
 ## Purpose
-Close the loop on a task: did we actually do what was asked, did we break anything, and does the result meet the acceptance criteria? Uses Serena for symbol-level verification when available — cheaper and more precise than re-reading files.
+Close the loop: did we actually do what was asked, did we break anything, does the result meet the acceptance criteria? Scores each finding 0–100 and filters low-confidence noise. Uses Serena for symbol-level verification.
 
 ## Inputs
-- `--depth shallow`: confirm the diff matches the stated task scope.
-- `--depth normal` (default): above + verify affected public surfaces behave as expected + tests pass.
+- `--depth shallow`: confirm diff matches stated task scope.
+- `--depth normal` (default): above + verify public surfaces + tests pass.
 - `--depth deep`: above + trace data-flow impact on callers + re-check invariants.
-- `--validate`: refuse to mark "done" until reflection passes; return a fix list otherwise.
+- `--validate`: refuse "done" until reflection passes; return fix list otherwise.
+- `--parallel`: run 3 reviewers with distinct lenses (simplicity/DRY, bugs/correctness, conventions/standards) in parallel.
+- `--threshold N`: only surface findings with confidence ≥ N. Default **80**. Lower for noisier output, higher for only-the-certain.
 
 ## Behavior
 1. Restate the original task and acceptance criteria.
-2. Use Serena (if present) to inspect the affected symbols and their callers; fall back to Read + Grep otherwise.
-3. Map diff → acceptance criteria, one by one. Mark each satisfied / unsatisfied / unclear.
+2. Use Serena (if present) for symbol-level inspection; fall back to Read + Grep.
+3. Map diff → acceptance criteria. Mark each satisfied / unsatisfied / unclear.
 4. Run tests; summarize pass/fail.
-5. Surface anything that was changed but wasn't requested — flag potential scope creep or accidental side-effects.
-6. If `--validate` fails, emit a concrete fix list and stop.
+5. **Score each finding 0–100** on confidence. Filter `< threshold`.
+6. Surface scope creep separately from bugs.
+7. If `--parallel`, run three reviewer passes with different lenses; merge findings by confidence score.
+8. **Write incremental notes** to `.claude/scratch/reflect-<date>.md` every 5 items so compaction mid-run doesn't lose progress. On resume, read the scratch file tail.
+9. If `--validate` fails, emit a concrete fix list and stop.
 
 ## Outputs
-- Criterion-by-criterion verdict table.
+- Criterion-by-criterion verdict table (with confidence per item).
 - Test summary.
-- Scope-creep list (if any).
-- Go / no-go recommendation with specific next steps if no-go.
+- Scope-creep list.
+- Findings ≥ threshold only.
+- Go / no-go verdict.
 
 ## MCP routing
 - **serena** (preferred): symbol-level verification without file re-reads.
-- **sequential-thinking**: structure the criterion-matching walk.
+- **sequential-thinking**: structure the criterion walk + parallel-reviewer merge.
 - **playwright**: for any UI criterion, verify in a real browser.

@@ -254,6 +254,31 @@ Yes. The CLI reads only your project files locally. Nothing is uploaded.
 
 ---
 
+## Complementary Anthropic plugins (install via `/plugin`)
+
+`clanker-code` deliberately does not reinvent what Anthropic already ships as official plugins. For deeper capability, complement clanker with:
+
+- **`/plugin install hookify@anthropic-official`** — create custom hooks from natural-language rules. The 80/20 answer for "I want Claude to always/never do X."
+- **`/plugin install pr-review-toolkit@anthropic-official`** — specialist PR-review agents (comments, tests, error handling, type design, simplification).
+- **`/plugin install claude-md-management@anthropic-official`** — the upstream version of clanker's `claude-md-improver` skill + `/revise-claude-md` command.
+- **`/plugin install ralph-loop@anthropic-official`** — iterate-until-complete workflow loop.
+- **`/plugin install skill-creator@anthropic-official`** — author your own skills with evals and benchmarks.
+- **`/plugin install mcp-server-dev@anthropic-official`** — build MCP servers in TypeScript or Python.
+
+### Matching LSP plugin (auto-suggested on `init`)
+
+For deeper semantic code awareness, install the LSP plugin matching your detected stack:
+
+| Stack | Plugin |
+|---|---|
+| Next.js / React / TypeScript | `/plugin install typescript-lsp@anthropic-official` |
+| Python | `/plugin install pyright-lsp@anthropic-official` |
+| Rust | `/plugin install rust-analyzer-lsp@anthropic-official` |
+| Go | `/plugin install gopls-lsp@anthropic-official` |
+| Ruby / PHP / Java / C# / Swift / Kotlin / Lua / C++ | `/plugin install <lang>-lsp@anthropic-official` |
+
+`clanker init` prints the matching recommendation for your stack automatically.
+
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md). The governance rule is simple: **every skill, agent, command, hook, and MCP must earn its slot**. PRs that add content without justifying startup-token cost will be closed with a pointer to existing content.

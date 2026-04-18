@@ -2,6 +2,55 @@
 
 All notable changes to `clanker-code` are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versioning follows [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] — 2026-04-18
+
+Grade A ecosystem adoptions. 11 high-value additions from the deep-dive research round, prioritized for value/token ratio.
+
+### Added
+
+**New agents (2):**
+- `code-explorer` — deep-dives an existing feature read-only: entry points, execution flow, key components, extension points. Fills a real gap `/analyze` didn't cover.
+- `code-architect` — designs 3 parallel implementation approaches (minimal / clean / pragmatic). User picks one before `/feat` moves to implementation.
+
+**New command (1):**
+- `/revise-claude-md` — audits CLAUDE.md against current repo state; optionally captures session learnings back into it. Proposes diffs, never silently edits. Source: Anthropic claude-md-management plugin.
+
+**New skills (4, lazy-loaded — zero startup cost):**
+- `meta/claude-md-improver.md` — prevent CLAUDE.md rot; power `/revise-claude-md`.
+- `workflow/tdd.md` — multi-agent RED/GREEN/REFACTOR with separate subagents per phase.
+- `quality/api-design-reviewer.md` — REST API linting + breaking-change detection. Source: alirezarezvani/claude-skills.
+- `quality/dependency-auditor.md` — license compliance, CVE scan, upgrade planning.
+
+**Enhanced commands:**
+- `/reflect` — added confidence scoring (0–100, filter ≥ 80), `--parallel` for three-lens review, `--threshold N` flag. Added incremental-notes pattern. Source: Anthropic code-review plugin.
+- `/feat` — full 8-phase workflow with 3 parallel `code-architect` proposals (minimal/clean/pragmatic), `/code-explorer` Phase 2, parallel reviewers in Phase 6, incremental-notes. Source: Anthropic feature-dev plugin.
+- `/analyze` — added incremental-notes pattern for long audits.
+
+**MCP registry:**
+- Added `codesight-mcp` (non-default) — 66 languages, 34 tools, hardened tree-sitter AST retrieval, claims ~99% token reduction. Source: cmillstead.
+
+**README — complementary Anthropic plugins:**
+- Recommends `hookify`, `pr-review-toolkit`, `claude-md-management`, `ralph-loop`, `skill-creator`, `mcp-server-dev` via `/plugin install` — offloads long-tail needs to Anthropic's maintained plugins rather than replicating.
+
+**Init-time LSP recommendation:**
+- After stack detection, `clanker init` prints the matching Anthropic LSP plugin (`typescript-lsp`, `pyright-lsp`, `rust-analyzer-lsp`, etc.). Zero token cost, pure documentation win.
+
+### Changed
+
+- **Agents:** 20 → 22 (added `code-explorer`, `code-architect`).
+- **Skills:** 42 → 46 (added 4 new).
+- **Commands:** 25 → 26 (added `/revise-claude-md`).
+- **MCP registry:** 16 → 17.
+- **Startup token budget:** ~18–20K (from ~17–19K — added ~900 tokens of new agents + command + enhancements, all under budget).
+
+### Notes
+
+- `/reflect --threshold 80` default comes from Anthropic's code-review plugin. Lower for noisier output, raise for only-the-certain.
+- Incremental audit notes pattern (from MDD/TheDecipherist) is near-free and solves the #1 long-run failure mode: compaction mid-audit.
+- `claude-md-improver` skill pairs with v0.4's `@import` CLAUDE.md pattern for a full "keep CLAUDE.md clean and current" story.
+
+---
+
 ## [0.4.0] — 2026-04-18
 
 Ecosystem parity pass. Ported the highest-value patterns from across the Claude Code ecosystem (Anthropic official docs, ccusage, disler hooks-mastery, peterkrueck dev kit, code-graph-mcp) into clanker-code's install layer — **net-zero or net-negative startup token cost**.

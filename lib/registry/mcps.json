@@ -150,6 +150,22 @@
         "args": ["mcp-server-time"]
       }
     },
+    "codesight-mcp": {
+      "name": "Codesight",
+      "publisher": "cmillstead (community)",
+      "category": "code-intelligence",
+      "description": "Tree-sitter AST, 66 languages, 34 tools, 2,495 tests, 6-step path validation, byte-offset retrieval. Claims ~99% token reduction on repo-wide retrieval. Hardened.",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 34,
+      "notDefault": true,
+      "install": {
+        "command": "npx",
+        "args": ["-y", "codesight-mcp"]
+      },
+      "prerequisites": "Set CODESIGHT_ALLOWED_ROOTS env var to the repos it is permitted to read."
+    },
     "code-graph-mcp": {
       "name": "Code Graph",
       "publisher": "sdsrss (community)",
