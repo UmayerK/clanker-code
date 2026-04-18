@@ -1,0 +1,261 @@
+{
+  "$schema": "https://clanker-code.dev/schemas/mcp-registry.v1.json",
+  "version": 1,
+  "defaultBundle": [
+    "sequential-thinking",
+    "context7",
+    "memory",
+    "playwright"
+  ],
+  "mcps": {
+    "sequential-thinking": {
+      "name": "Sequential Thinking",
+      "publisher": "Anthropic",
+      "category": "reasoning",
+      "description": "Structured step-by-step reasoning for architecture and debugging.",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 1,
+      "install": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+      }
+    },
+    "context7": {
+      "name": "Context7",
+      "publisher": "Upstash",
+      "category": "docs",
+      "description": "Library documentation lookup. Free tier works without a key.",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 2,
+      "install": {
+        "command": "npx",
+        "args": ["-y", "@upstash/context7-mcp"]
+      }
+    },
+    "memory": {
+      "name": "Memory",
+      "publisher": "Anthropic",
+      "category": "persistence",
+      "description": "Local knowledge graph for cross-session persistence (JSON on disk).",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 9,
+      "install": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-memory"]
+      }
+    },
+    "playwright": {
+      "name": "Playwright",
+      "publisher": "Microsoft",
+      "category": "browser",
+      "description": "Real browser automation for UI verification and E2E testing. ~150MB Chromium download on first run.",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 22,
+      "install": {
+        "command": "npx",
+        "args": ["-y", "@playwright/mcp@latest"]
+      },
+      "postInstall": {
+        "message": "Playwright will download Chromium (~150MB) on first use. Run `npx playwright install chromium` to pre-download."
+      }
+    },
+    "filesystem": {
+      "name": "Filesystem",
+      "publisher": "Anthropic",
+      "category": "local-ops",
+      "description": "Sandboxed filesystem access. Note: Claude Code has built-in Read/Write/Edit/Glob/Grep; this MCP is mostly redundant but useful for non-Claude-Code clients.",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 11,
+      "notDefault": true,
+      "redundantWithClaudeCode": true,
+      "install": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-filesystem", "${PWD}"]
+      }
+    },
+    "serena": {
+      "name": "Serena",
+      "publisher": "oraios (community)",
+      "category": "code-intelligence",
+      "description": "LSP-backed semantic code editing across languages. Powerful for refactoring.",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 20,
+      "requiresPython": true,
+      "install": {
+        "command": "uvx",
+        "args": ["--from", "git+https://github.com/oraios/serena", "serena-mcp-server"]
+      },
+      "prerequisites": "Requires `uv` (Python package manager). Install: `curl -LsSf https://astral.sh/uv/install.sh | sh`"
+    },
+    "chrome-devtools": {
+      "name": "Chrome DevTools",
+      "publisher": "Google",
+      "category": "browser-debug",
+      "description": "Live Chrome session debugging — performance, console, network. Complements Playwright.",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 26,
+      "install": {
+        "command": "npx",
+        "args": ["-y", "chrome-devtools-mcp@latest"]
+      },
+      "prerequisites": "Requires Google Chrome installed locally."
+    },
+    "sqlite": {
+      "name": "SQLite",
+      "publisher": "jparkerweb (community)",
+      "category": "database",
+      "description": "Local SQLite database access (Anthropic's official SQLite MCP is archived; this is the maintained alternative).",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 6,
+      "install": {
+        "command": "npx",
+        "args": ["-y", "mcp-sqlite"]
+      }
+    },
+    "time": {
+      "name": "Time",
+      "publisher": "Anthropic",
+      "category": "utility",
+      "description": "Timezone math and time utilities. Tiny but occasionally essential.",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 2,
+      "requiresPython": true,
+      "install": {
+        "command": "uvx",
+        "args": ["mcp-server-time"]
+      }
+    },
+    "github": {
+      "name": "GitHub",
+      "publisher": "GitHub",
+      "category": "vcs",
+      "description": "GitHub API access — repos, issues, PRs, code search.",
+      "local": false,
+      "requiresSignup": true,
+      "requiresKey": true,
+      "toolCount": 30,
+      "notDefault": true,
+      "setup": {
+        "url": "https://github.com/settings/tokens/new?scopes=repo,read:org,read:user",
+        "envVar": "GITHUB_TOKEN",
+        "instructions": "Create a GitHub personal access token with `repo`, `read:org`, `read:user` scopes. Set as GITHUB_TOKEN env var or paste when prompted."
+      },
+      "install": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-github"]
+      }
+    },
+    "notion": {
+      "name": "Notion",
+      "publisher": "Notion",
+      "category": "docs",
+      "description": "Read and write Notion pages, databases, comments.",
+      "local": false,
+      "requiresSignup": true,
+      "requiresKey": true,
+      "toolCount": 20,
+      "notDefault": true,
+      "setup": {
+        "url": "https://www.notion.so/my-integrations",
+        "envVar": "NOTION_API_KEY",
+        "instructions": "Create a Notion integration, copy the internal integration token, share pages with the integration in Notion UI."
+      },
+      "install": {
+        "command": "npx",
+        "args": ["-y", "@notionhq/notion-mcp-server"]
+      }
+    },
+    "linear": {
+      "name": "Linear",
+      "publisher": "Linear",
+      "category": "pm",
+      "description": "Linear issues, projects, cycles.",
+      "local": false,
+      "requiresSignup": true,
+      "requiresKey": true,
+      "toolCount": 15,
+      "notDefault": true,
+      "setup": {
+        "url": "https://linear.app/settings/api",
+        "envVar": "LINEAR_API_KEY",
+        "instructions": "Create a personal API key in Linear settings. Paste when prompted or set LINEAR_API_KEY."
+      },
+      "install": {
+        "command": "npx",
+        "args": ["-y", "@linear/mcp-server"]
+      }
+    },
+    "figma": {
+      "name": "Figma",
+      "publisher": "Figma",
+      "category": "design",
+      "description": "Read Figma designs, create FigJam diagrams, manage Code Connect mappings.",
+      "local": false,
+      "requiresSignup": true,
+      "requiresKey": false,
+      "toolCount": 15,
+      "notDefault": true,
+      "setup": {
+        "url": "https://www.figma.com/developers/api",
+        "instructions": "Authenticate via the Figma desktop app or provide a personal access token."
+      },
+      "install": {
+        "command": "npx",
+        "args": ["-y", "@figma/mcp"]
+      }
+    },
+    "slack": {
+      "name": "Slack",
+      "publisher": "Community",
+      "category": "communication",
+      "description": "Read Slack channels, send messages, search history.",
+      "local": false,
+      "requiresSignup": true,
+      "requiresKey": true,
+      "toolCount": 10,
+      "notDefault": true,
+      "setup": {
+        "url": "https://api.slack.com/apps",
+        "envVar": "SLACK_BOT_TOKEN",
+        "instructions": "Create a Slack app, add scopes (channels:history, chat:write, users:read), install to workspace, copy bot token."
+      },
+      "install": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-slack"]
+      }
+    }
+  },
+  "categories": {
+    "reasoning": "Structured reasoning and planning",
+    "docs": "Documentation lookup and writing",
+    "persistence": "Cross-session memory and state",
+    "browser": "Browser automation and testing",
+    "browser-debug": "Live browser debugging",
+    "local-ops": "Local filesystem and shell",
+    "code-intelligence": "Code analysis and semantic editing",
+    "database": "Database access",
+    "utility": "Miscellaneous utilities",
+    "vcs": "Version control (GitHub/GitLab)",
+    "pm": "Project management",
+    "design": "Design tools (Figma/Sketch)",
+    "communication": "Team communication"
+  }
+}

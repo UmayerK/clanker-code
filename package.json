@@ -1,0 +1,47 @@
+{
+  "name": "clanker-code",
+  "version": "0.1.0",
+  "description": "The Claude Code starter kit. One command. Ready to ship.",
+  "keywords": [
+    "claude",
+    "claude-code",
+    "starter-kit",
+    "cli",
+    "mcp",
+    "ai-coding"
+  ],
+  "homepage": "https://github.com/umayer/clanker-code",
+  "bugs": {
+    "url": "https://github.com/umayer/clanker-code/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umayer/clanker-code.git"
+  },
+  "license": "MIT",
+  "author": "Umayer",
+  "type": "module",
+  "bin": {
+    "clanker": "./bin/clanker.js"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "templates",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test test/",
+    "start": "node ./bin/clanker.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "prompts": "^2.4.2",
+    "picocolors": "^1.0.1",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {}
+}
