@@ -17,13 +17,21 @@ claude
 That's it. Your repo now has:
 
 - **4 pre-wired local-first MCPs** (+ Serena auto-added if `uv` is detected) — no signup, no API keys
-- **28 slash commands** — `/brainstorm`, `/implement`, `/debug`, `/review`, `/test`, `/feat`, `/index-repo`, `/select-tool`, `/pm`, `/recommend`, `/reflect`, `/mcp-help`, and more
+- **25 slash commands** — headlined by `/vibe` (fuzzy idea → working app, end to end), plus `/brainstorm`, `/implement`, `/debug`, `/review`, `/test`, `/feat`, `/select-tool`, `/pm`, `/recommend`, `/reflect`, `/mcp-help`, and more
 - **20 specialized agents** — frontend-builder, backend-builder, debugger, reviewer, planner, tester, security-engineer, architect, and 12 more
-- **~50 curated skills** — workflow, quality, security, git, framework-specific, plus framework patterns (persona auto-activation, wave orchestration, global flags, UC mode, Serena usage)
+- **41 curated skills** — workflow, quality, security, git, framework-specific, plus framework patterns (persona auto-activation, wave orchestration, global flags, UC mode, Serena usage)
 - **Global command flags** — `--strategy systematic|agile|enterprise`, `--depth shallow|normal|deep`, `--parallel`, `--validate`, `--uc` (ultracompressed)
 - **7 safety hooks** — auto-format, destructive-command guard, secret-leak guard, spec-awareness, and more
 - **Stack-tailored `CLAUDE.md`** — auto-detects Next.js, React, Node API, Python API, and more
 - **`specs/` scaffolding** — spec-first workflow out of the box
+
+### The `/vibe` command
+
+```
+/vibe a team todo app with daily standup summaries
+```
+
+One command. Claude asks a few clarifying questions (Socratic, one at a time), writes the spec, plans it, builds it in parallel across specialized agents, tests with Playwright, reviews against OWASP and project standards, and stops with a suggested commit message. No auto-commits, no auto-pushes — you stay in control.
 
 ---
 
@@ -123,26 +131,24 @@ Need more? `clanker mcp-help` has a curated registry of 14+ MCPs across categori
 
 ### Slash commands
 
-28 commands (21 SuperClaude-parity + 7 clanker extensions):
+25 commands. Every command supports the global flag set (`--strategy`, `--depth`, `--parallel`, `--validate`, `--uc`).
 
 ```
-/brainstorm   /implement    /analyze      /debug        /improve
-/document     /test         /design       /build        /cleanup
-/estimate     /explain      /git          /index        /load
-/save         /reflect      /task         /help         /research
-/spawn        /mcp-help     /feat         /setup        /index-repo
-/select-tool  /pm           /recommend
+/vibe         /brainstorm   /implement    /analyze      /debug
+/improve      /document     /test         /design       /build
+/cleanup      /estimate     /explain      /git          /index
+/load         /save         /reflect      /help         /research
+/mcp-help     /feat         /select-tool  /pm           /recommend
 ```
-
-Each command wires a specialized agent, relevant skills, and the right MCPs. Every command supports the global flag set (`--strategy`, `--depth`, `--parallel`, `--validate`, `--uc`).
 
 **Power commands:**
 
-- `/index-repo [--depth shallow|normal|deep]` — compress repo to a <3K-token brief
+- `/vibe <idea>` — **fuzzy idea → complete working app**, end to end
+- `/pm <goal>` — multi-agent orchestration (replaces `/task` and `/spawn`)
 - `/select-tool <task>` — explicit MCP/tool selection based on task complexity
-- `/pm <goal>` — multi-agent orchestration (plan → build → verify waves)
 - `/recommend <goal>` — fuzzy-ask to concrete-command recommendation
 - `/reflect [--depth deep] [--validate]` — semantic validation that closes the loop
+- `/index --brief` — compress repo into a <3K-token brief for cheap downstream context
 
 ### Agents (20)
 

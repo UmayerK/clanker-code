@@ -37,6 +37,7 @@ ${pc.bold('Commands:')}
 
 ${pc.bold('init flags:')}
   --minimal         CLAUDE.md + specs/ only
+  --setup-only      Only write specs/ scaffolding (for existing repos)
   --no-mcps         Skip MCP installation
   --no-hooks        Skip hook configuration
   --force           Overwrite existing .claude/ without prompting
@@ -45,6 +46,7 @@ ${pc.bold('init flags:')}
 ${pc.bold('Examples:')}
   npx clanker-code init
   npx clanker-code init --minimal
+  npx clanker-code init --setup-only
   npx clanker-code mcp-help list
   npx clanker-code mcp-help add github
 `);

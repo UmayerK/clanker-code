@@ -12,7 +12,7 @@ Produce a prioritized findings report across four dimensions for the given scope
 - `<path-or-scope>`: file, directory, or module. Defaults to repo root.
 - `--focus quality|security|perf|arch`: limit to one dimension; otherwise cover all four.
 - `--depth shallow|normal|deep`: controls how many files to inspect and how far to trace callers.
-- `--parallel`: run the four dimension passes concurrently via `/spawn` (faster, more tokens).
+- `--parallel`: run the four dimension passes concurrently via `/pm --parallel` (faster, more tokens).
 
 ## Behavior
 1. Resolve scope. If Serena is available, build a symbol inventory first — cheaper than reading everything.

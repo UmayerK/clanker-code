@@ -55,7 +55,7 @@ This section is managed by `clanker-code`. Edits outside the `<!-- clanker-code:
 
 ## 7. Commands
 
-`/brainstorm`, `/plan`, `/implement`, `/debug`, `/review`, `/test`, `/improve`, `/document`, `/design`, `/analyze`, `/index-repo`, `/select-tool`, `/pm`, `/recommend`, `/reflect`, `/mcp-help`, `/feat`, `/help`.
+`/vibe`, `/brainstorm`, `/implement`, `/debug`, `/review`, `/test`, `/improve`, `/document`, `/design`, `/analyze`, `/index`, `/select-tool`, `/pm`, `/recommend`, `/reflect`, `/mcp-help`, `/feat`, `/help`.
 
 ## 8. Specs
 

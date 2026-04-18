@@ -2,6 +2,42 @@
 
 All notable changes to `clanker-code` are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versioning follows [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] — 2026-04-18
+
+Added the headline `/vibe` command. Trimmed ~4,700 startup tokens through surgical cuts.
+
+### Added
+
+- **`/vibe <idea>`** — end-to-end app builder. Fuzzy idea → Socratic discovery → spec → plan → parallel build → test → review → reflection. Stops with a suggested commit message; never auto-commits or auto-pushes.
+- **`systematic-investigation` skill** — unified skeleton for debugging, performance, and security investigations. Replaces three separate skills with one stronger one.
+- **`/index --brief` mode** — produces a <3K-token repo knowledge brief (replaces the dropped `/index-repo`).
+- **`clanker init --setup-only` flag** — writes only `specs/` scaffolding for existing repos (replaces the dropped `/setup` command).
+
+### Removed
+
+- `/task` — superseded by `/pm`, which has first-class task breakdown.
+- `/spawn` — superseded by `/pm --parallel`.
+- `/setup` — now `clanker init --setup-only` on the CLI.
+- `/index-repo` — merged into `/index --brief`.
+- 6 meta skills collapsed into their command bodies: `brainstorm-socratic`, `estimate-conservatively`, `research-depth`, `explain-educationally`, `analyze-systematically`, `document-patterns`. Same guidance, now where it's actually loaded.
+- 3 investigation skills consolidated into `systematic-investigation`: `debug-systematically`, `performance-investigation`, `security-audit-approach`.
+- `architecture-decisions` skill — already covered by `/design` and the `architect` agent.
+
+### Changed
+
+- **Commands:** 28 → 25 (removed 4: `/task`, `/spawn`, `/setup`, `/index-repo`; added 1: `/vibe`).
+- **Skills:** 50 → 41.
+- **Agents:** 20 → 20 (unchanged — persona agents preserved per user preference).
+- **Startup token budget:** ~22–24K → ~17–19K. Back under the original 0.1 target.
+
+### Notes
+
+- Persona agent duplication with Claude Code built-ins was flagged again but deliberately kept per user preference; users who want the trim can delete `.claude/agents/personas/` locally.
+- All removed commands had direct replacements — no capability regression.
+
+---
+
+
 ## [0.2.0] — 2026-04-18
 
 Parity pass with SuperClaude's coding-relevant features.

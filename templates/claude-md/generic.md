@@ -61,8 +61,8 @@ For tasks that span multiple specialists, use **wave orchestration** (see `wave-
 
 ## 7. Commands available
 
+- `/vibe <idea>` — **fuzzy idea → complete working app**, end-to-end (discovery → spec → build → test → review)
 - `/brainstorm <topic>` — interactive requirements discovery
-- `/plan <task>` — break ambiguous work into steps
 - `/implement <feature>` — implement with agent + testing
 - `/debug <symptom>` — systematic root-cause investigation
 - `/review` — review current diff against standards
@@ -71,13 +71,13 @@ For tasks that span multiple specialists, use **wave orchestration** (see `wave-
 - `/document <target>` — generate or update docs
 - `/design <system>` — architecture design
 - `/analyze <scope>` — deep analysis across quality/security/perf/arch
-- `/index-repo` — compress the repo into a minimal knowledge brief
+- `/index [--brief]` — full docs index, or compressed <3K-token repo brief
 - `/select-tool <task>` — score complexity and pick the right MCP/tool
-- `/pm <goal>` — multi-agent orchestration with task breakdown
+- `/pm <goal>` — multi-agent orchestration (replaces /task and /spawn)
 - `/recommend <goal>` — recommend the right command for a fuzzy ask
-- `/reflect` — validate completed work against requirements
+- `/reflect` — validate completed work with semantic awareness
 - `/mcp-help` — discover and install more MCPs
-- `/feat <name>` — full feature workflow (spec → implement → test)
+- `/feat <name>` — focused feature workflow (spec → implement → test)
 - `/help` — full command list
 
 ## 8. Specs
