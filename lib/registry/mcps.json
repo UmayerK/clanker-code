@@ -150,6 +150,37 @@
         "args": ["mcp-server-time"]
       }
     },
+    "code-graph-mcp": {
+      "name": "Code Graph",
+      "publisher": "sdsrss (community)",
+      "category": "code-intelligence",
+      "description": "AST-backed code knowledge graph (10 languages). Claims 6-49x token reduction on repo-wide review and impact analysis. Complements Serena.",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 12,
+      "notDefault": true,
+      "install": {
+        "command": "npx",
+        "args": ["-y", "code-graph-mcp"]
+      },
+      "prerequisites": "Works best on repos already indexed. Runs locally, no external calls."
+    },
+    "code-review-graph": {
+      "name": "Code Review Graph",
+      "publisher": "tirth8205 (community)",
+      "category": "code-intelligence",
+      "description": "Tree-sitter AST + local SQLite graph, tuned for code review. Claims 6.8-49x token reduction on diff review.",
+      "local": true,
+      "requiresSignup": false,
+      "requiresKey": false,
+      "toolCount": 8,
+      "notDefault": true,
+      "install": {
+        "command": "npx",
+        "args": ["-y", "code-review-graph-mcp"]
+      }
+    },
     "github": {
       "name": "GitHub",
       "publisher": "GitHub",

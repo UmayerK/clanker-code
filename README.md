@@ -21,7 +21,8 @@ That's it. Your repo now has:
 - **20 specialized agents** — frontend-builder, backend-builder, debugger, reviewer, planner, tester, security-engineer, architect, and 12 more
 - **41 curated skills** — workflow, quality, security, git, framework-specific, plus framework patterns (persona auto-activation, wave orchestration, global flags, UC mode, Serena usage)
 - **Global command flags** — `--strategy systematic|agile|enterprise`, `--depth shallow|normal|deep`, `--parallel`, `--validate`, `--uc` (ultracompressed)
-- **7 safety hooks** — auto-format, destructive-command guard, secret-leak guard, spec-awareness, and more
+- **8 safety + ergonomics hooks** — auto-format, destructive-command guard, secret-leak guard, spec-awareness, git-context, SessionStart(compact) re-inject, and more (plus 5 opt-in)
+- **Default statusline via `npx ccusage statusline`** — live context and cost tracking in your status bar (Anthropic's recommended pattern)
 - **Stack-tailored `CLAUDE.md`** — auto-detects Next.js, React, Node API, Python API, and more
 - **`specs/` scaffolding** — spec-first workflow out of the box
 

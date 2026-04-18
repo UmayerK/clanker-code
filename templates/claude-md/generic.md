@@ -4,6 +4,12 @@ This file is managed in part by `clanker-code`. The section between the `<!-- cl
 
 **Detected stack:** `{{STACK}}` · **Frameworks:** {{FRAMEWORKS}}
 
+## Imported context (lazy-loaded on demand by Claude Code)
+
+See @specs/00-product.md for product context.
+See @specs/01-stack.md for stack details beyond what this file covers.
+See @specs/02-standards.md for project-specific conventions.
+
 ---
 
 ## 1. How Claude should work in this project

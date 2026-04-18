@@ -1,5 +1,17 @@
 {
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccusage statusline"
+  },
   "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          { "type": "command", "command": "node .claude/hooks/scripts/context-reinject.js" }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -12,6 +24,12 @@
         "hooks": [
           { "type": "command", "command": "node .claude/hooks/scripts/secret-leak-guard.js" },
           { "type": "command", "command": "node .claude/hooks/scripts/gitignore-warn.js" }
+        ]
+      },
+      {
+        "matcher": "ExitPlanMode",
+        "hooks": [
+          { "type": "command", "command": "node .claude/hooks/scripts/exit-plan-autoapprove.js" }
         ]
       }
     ],
@@ -28,6 +46,13 @@
         "hooks": [
           { "type": "command", "command": "node .claude/hooks/scripts/spec-awareness.js" },
           { "type": "command", "command": "node .claude/hooks/scripts/git-context.js" }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node .claude/hooks/scripts/transcript-backup.js" }
         ]
       }
     ],

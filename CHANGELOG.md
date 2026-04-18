@@ -2,6 +2,36 @@
 
 All notable changes to `clanker-code` are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versioning follows [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] — 2026-04-18
+
+Ecosystem parity pass. Ported the highest-value patterns from across the Claude Code ecosystem (Anthropic official docs, ccusage, disler hooks-mastery, peterkrueck dev kit, code-graph-mcp) into clanker-code's install layer — **net-zero or net-negative startup token cost**.
+
+### Added
+
+- **Default statusline** (`statusLine` in `settings.json`) — invokes `npx -y ccusage statusline` for live context/cost tracking. Zero startup tokens (rendered by the CLI, not the conversation). Anthropic's recommended pattern.
+- **`/plan` skill (plan-mode.md)** — teaches Claude to enter Plan Mode on `/plan <task>` for Anthropic's canonical Explore → Plan → Implement → Commit loop. ~100 tokens, lazy-loaded.
+- **SessionStart(compact) context re-inject hook** (`context-reinject.js`) — active by default. After auto-compaction, re-injects branch, last 5 commits, active specs list, and CLAUDE.md top-line. Only fires on compaction — zero cost on fresh sessions.
+- **PreCompact transcript-backup hook** (`transcript-backup.js`) — opt-in. Dumps pre-compact transcript to `.claude/transcripts/*.jsonl` for detail recovery.
+- **ExitPlanMode auto-approve hook** (`exit-plan-autoapprove.js`) — opt-in. Anthropic's canonical narrow auto-approve pattern — bypasses *only* the Plan Mode exit prompt.
+- **Code Graph MCPs in registry** (non-default): `code-graph-mcp` and `code-review-graph`. Both claim 6.8–49× token reductions on repo-wide review. Install via `clanker mcp-help add code-graph-mcp`.
+- **`@import` in all 5 CLAUDE.md templates** — lazy-loads `specs/00-product.md`, `specs/01-stack.md`, `specs/02-standards.md` on demand. Net-saves 300–1,500 tokens per session on projects that don't need imported detail loaded.
+
+### Changed
+
+- **Hooks:** 10 → 13 (8 active + 5 opt-in).
+- **Skills:** 41 → 42 (added `plan-mode`).
+- **MCP registry:** 14 → 16 (added 2 code-graph MCPs; non-default).
+- **Token budget:** still ~17–19K startup; new hooks and skill are either zero-startup or lazy-loaded. `@import` makes the net trend downward.
+
+### Notes
+
+- `ccusage` is called via `npx -y`, which self-installs on first use. If users decline, the statusline gracefully disappears.
+- All new hooks honor `CLANKER_HOOKS=off` and per-hook kill switches.
+- `exit-plan-autoapprove` uses the narrowest possible matcher (only `ExitPlanMode`); no broader permission loosening.
+- Code graph MCPs require individual enable via `mcp-help add` — not auto-installed since they have overlap with Serena and users should pick one.
+
+---
+
 ## [0.3.0] — 2026-04-18
 
 Added the headline `/vibe` command. Trimmed ~4,700 startup tokens through surgical cuts.

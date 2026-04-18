@@ -21,6 +21,13 @@ describe('MCP registry', () => {
     );
   });
 
+  test('registry includes code-graph MCPs (non-default)', async () => {
+    const reg = JSON.parse(await readFile(registryPath, 'utf8'));
+    assert.ok(reg.mcps['code-graph-mcp'], 'code-graph-mcp registered');
+    assert.ok(reg.mcps['code-review-graph'], 'code-review-graph registered');
+    assert.equal(reg.mcps['code-graph-mcp'].notDefault, true);
+  });
+
   test('every default-bundle MCP is local-first with no signup', async () => {
     const reg = JSON.parse(await readFile(registryPath, 'utf8'));
     for (const key of reg.defaultBundle) {

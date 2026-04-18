@@ -4,6 +4,12 @@ This section is managed by `clanker-code`. Edits outside the `<!-- clanker-code:
 
 **Detected stack:** `{{STACK}}` · **Frameworks:** {{FRAMEWORKS}}
 
+## Imported context (lazy-loaded on demand)
+
+See @specs/00-product.md for product context.
+See @specs/01-stack.md for stack details beyond React conventions.
+See @specs/02-standards.md for project-specific conventions.
+
 ---
 
 ## 1. React conventions

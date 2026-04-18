@@ -61,13 +61,15 @@ describe('shipped content — commands', () => {
 });
 
 describe('shipped content — hook scripts are present', () => {
-  test('all 10 hook scripts exist', async () => {
+  test('all hook scripts exist', async () => {
     const scripts = join(templatesDir, 'claude', 'hooks', 'scripts');
     const files = await readdir(scripts);
     const expected = [
       'destructive-bash-guard.js', 'secret-leak-guard.js', 'gitignore-warn.js',
       'auto-format.js', 'spec-awareness.js', 'git-context.js', 'stop-notify.js',
-      'session-log.js', 'typecheck-bg.js', 'pkg-install-offer.js', 'lib.js',
+      'session-log.js', 'typecheck-bg.js', 'pkg-install-offer.js',
+      'context-reinject.js', 'transcript-backup.js', 'exit-plan-autoapprove.js',
+      'lib.js',
     ];
     for (const e of expected) assert.ok(files.includes(e), `${e} exists`);
   });
