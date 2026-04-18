@@ -45,7 +45,7 @@ typescript
 
 ## Setting up the repo
 
-1. Create the repository at `github.com/umayer/clanker-code`.
+1. Create the repository at `github.com/UmayerK/clanker-code`.
 2. Paste the short description into the "Description" field.
 3. Set the website to the npm URL (or leave empty until published).
 4. Click "Add topics" and paste the topics list.

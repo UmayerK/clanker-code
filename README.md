@@ -248,6 +248,6 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md). The governance rule is simple: **every
 
 ## Links
 
-- **GitHub:** https://github.com/umayer/clanker-code
+- **GitHub:** https://github.com/UmayerK/clanker-code
 - **npm:** https://www.npmjs.com/package/clanker-code
-- **Issues:** https://github.com/umayer/clanker-code/issues
+- **Issues:** https://github.com/UmayerK/clanker-code/issues

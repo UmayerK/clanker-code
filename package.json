@@ -10,13 +10,13 @@
     "mcp",
     "ai-coding"
   ],
-  "homepage": "https://github.com/umayer/clanker-code",
+  "homepage": "https://github.com/UmayerK/clanker-code",
   "bugs": {
-    "url": "https://github.com/umayer/clanker-code/issues"
+    "url": "https://github.com/UmayerK/clanker-code/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/umayer/clanker-code.git"
+    "url": "git+https://github.com/UmayerK/clanker-code.git"
   },
   "license": "MIT",
   "author": "Umayer",
