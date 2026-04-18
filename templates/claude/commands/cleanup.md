@@ -1,7 +1,7 @@
 ---
 name: cleanup
 description: Systematically remove dead code, unused exports, and stale artifacts.
-argument-hint: <path-or-scope>
+argument-hint: <path-or-scope> [--depth shallow|normal|deep] [--parallel] [--validate] [--uc]
 delegates-to: refactorer
 ---
 
@@ -22,3 +22,7 @@ Shrink the codebase by removing provably unused code and artifacts without chang
 - Deletions and small refactors with passing tests.
 - Summary of items removed by category.
 - List of suspicious-but-kept items requiring human review.
+
+## MCP routing
+- **serena**: semantic symbol search to prove an export has no remaining callers before deletion.
+- **sequential-thinking**: sequences batches and validates each removal preserves behavior.

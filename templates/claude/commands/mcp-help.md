@@ -1,7 +1,7 @@
 ---
 name: mcp-help
 description: Discover, install, and remove MCP servers via the clanker CLI.
-argument-hint: <list|install|remove|info> [server-name]
+argument-hint: <list|install|remove|info> [server-name] [--uc]
 delegates-to:
 ---
 
@@ -22,3 +22,6 @@ Manage MCP server installations from inside Claude Code without leaving the sess
 ## Outputs
 - Command output from `clanker mcp-help`.
 - Post-action guidance for next steps (env vars, restart, etc.).
+
+## MCP routing
+- No MCPs required: reads the local clanker registry via Bash.

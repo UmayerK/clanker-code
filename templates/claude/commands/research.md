@@ -1,7 +1,7 @@
 ---
 name: research
 description: Deep web research with adaptive planning and source synthesis.
-argument-hint: <question-or-topic> [--depth quick|standard|deep]
+argument-hint: <question-or-topic> [--depth quick|standard|deep] [--parallel] [--uc]
 delegates-to:
 ---
 
@@ -23,3 +23,6 @@ Investigate a topic with planned queries, cite primary sources, and synthesize a
 - Structured brief with findings, citations, and confidence levels.
 - Source list with URLs and dates.
 - Open questions and recommended follow-ups.
+
+## MCP routing
+- No MCPs required beyond built-in WebSearch and WebFetch.

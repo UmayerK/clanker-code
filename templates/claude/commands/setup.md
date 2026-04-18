@@ -1,7 +1,7 @@
 ---
 name: setup
 description: Initialize the specs/ folder structure and project conventions file.
-argument-hint: [--force]
+argument-hint: [--force] [--uc]
 delegates-to:
 ---
 
@@ -22,3 +22,6 @@ Bootstrap a project with a `specs/` directory, starter templates, and a conventi
 - `specs/` directory populated with starter files.
 - `CLAUDE.md` with conventions stub.
 - Next-step checklist for the user.
+
+## MCP routing
+- No MCPs required: scaffolds local files only.

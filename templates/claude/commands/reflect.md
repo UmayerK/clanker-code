@@ -1,24 +1,34 @@
 ---
 name: reflect
-description: Validate completed work against original task requirements and acceptance criteria.
-argument-hint: <task-or-spec-path>
+description: Validate completed work against stated requirements with semantic code awareness.
+argument-hint: [--depth shallow|normal|deep] [--validate]
 delegates-to: reviewer
 ---
 
 ## Purpose
-Verify that completed work actually satisfies the stated requirements before declaring done.
+Close the loop on a task: did we actually do what was asked, did we break anything, and does the result meet the acceptance criteria? Uses Serena for symbol-level verification when available — cheaper and more precise than re-reading files.
 
 ## Inputs
-- `<task-or-spec-path>`: the spec file or task description to validate against.
+- `--depth shallow`: confirm the diff matches the stated task scope.
+- `--depth normal` (default): above + verify affected public surfaces behave as expected + tests pass.
+- `--depth deep`: above + trace data-flow impact on callers + re-check invariants.
+- `--validate`: refuse to mark "done" until reflection passes; return a fix list otherwise.
 
 ## Behavior
-1. Load the original spec or task and extract acceptance criteria.
-2. Delegate to `reviewer` with the diff and criteria.
-3. Reviewer maps each criterion to evidence in code or tests.
-4. Flag criteria that are unmet, partially met, or silently changed.
-5. Recommend fixes or spec updates for any gaps.
+1. Restate the original task and acceptance criteria.
+2. Use Serena (if present) to inspect the affected symbols and their callers; fall back to Read + Grep otherwise.
+3. Map diff → acceptance criteria, one by one. Mark each satisfied / unsatisfied / unclear.
+4. Run tests; summarize pass/fail.
+5. Surface anything that was changed but wasn't requested — flag potential scope creep or accidental side-effects.
+6. If `--validate` fails, emit a concrete fix list and stop.
 
 ## Outputs
-- Criterion-by-criterion status table.
-- List of gaps with recommended actions.
-- Go/no-go verdict for marking the task complete.
+- Criterion-by-criterion verdict table.
+- Test summary.
+- Scope-creep list (if any).
+- Go / no-go recommendation with specific next steps if no-go.
+
+## MCP routing
+- **serena** (preferred): symbol-level verification without file re-reads.
+- **sequential-thinking**: structure the criterion-matching walk.
+- **playwright**: for any UI criterion, verify in a real browser.

@@ -16,10 +16,11 @@ claude
 
 That's it. Your repo now has:
 
-- **4 pre-wired local-first MCPs** — no signup, no API keys, just works
-- **24 slash commands** — `/brainstorm`, `/implement`, `/debug`, `/review`, `/test`, `/feat`, `/mcp-help`, and more
+- **4 pre-wired local-first MCPs** (+ Serena auto-added if `uv` is detected) — no signup, no API keys
+- **28 slash commands** — `/brainstorm`, `/implement`, `/debug`, `/review`, `/test`, `/feat`, `/index-repo`, `/select-tool`, `/pm`, `/recommend`, `/reflect`, `/mcp-help`, and more
 - **20 specialized agents** — frontend-builder, backend-builder, debugger, reviewer, planner, tester, security-engineer, architect, and 12 more
-- **~45 curated skills** — workflow, quality, security, git, and framework-specific guidance
+- **~50 curated skills** — workflow, quality, security, git, framework-specific, plus framework patterns (persona auto-activation, wave orchestration, global flags, UC mode, Serena usage)
+- **Global command flags** — `--strategy systematic|agile|enterprise`, `--depth shallow|normal|deep`, `--parallel`, `--validate`, `--uc` (ultracompressed)
 - **7 safety hooks** — auto-format, destructive-command guard, secret-leak guard, spec-awareness, and more
 - **Stack-tailored `CLAUDE.md`** — auto-detects Next.js, React, Node API, Python API, and more
 - **`specs/` scaffolding** — spec-first workflow out of the box
@@ -80,7 +81,7 @@ npx clanker-code version
 
 ## What gets installed
 
-### Default MCPs (4)
+### Default MCPs (4 + 1 conditional)
 
 All local-first, no signup, no API keys.
 
@@ -90,6 +91,9 @@ All local-first, no signup, no API keys.
 | `context7` | Up-to-date library docs (kills hallucinated API calls) |
 | `memory` | Local knowledge graph — persist project facts across sessions |
 | `playwright` | Real browser automation for UI verification (downloads Chromium on first use) |
+| `serena` *(auto-added if `uv` is installed)* | LSP-backed semantic code editing — renames, find-usages, impact analysis |
+
+If `uv` is not installed, Serena is skipped (with a hint for how to enable it later). Install `uv` at https://docs.astral.sh/uv/ then run `npx clanker-code mcp-help add serena`.
 
 Need more? `clanker mcp-help` has a curated registry of 14+ MCPs across categories — databases, code intelligence, GitHub, Notion, Linear, Figma, and more — with guided setup for anything needing an API key.
 
@@ -119,17 +123,26 @@ Need more? `clanker mcp-help` has a curated registry of 14+ MCPs across categori
 
 ### Slash commands
 
-21 SuperClaude-parity commands + 3 clanker-native:
+28 commands (21 SuperClaude-parity + 7 clanker extensions):
 
 ```
 /brainstorm   /implement    /analyze      /debug        /improve
 /document     /test         /design       /build        /cleanup
 /estimate     /explain      /git          /index        /load
 /save         /reflect      /task         /help         /research
-/spawn        /mcp-help     /feat         /setup
+/spawn        /mcp-help     /feat         /setup        /index-repo
+/select-tool  /pm           /recommend
 ```
 
-Each command wires a specialized agent, relevant skills, and the right MCPs.
+Each command wires a specialized agent, relevant skills, and the right MCPs. Every command supports the global flag set (`--strategy`, `--depth`, `--parallel`, `--validate`, `--uc`).
+
+**Power commands:**
+
+- `/index-repo [--depth shallow|normal|deep]` — compress repo to a <3K-token brief
+- `/select-tool <task>` — explicit MCP/tool selection based on task complexity
+- `/pm <goal>` — multi-agent orchestration (plan → build → verify waves)
+- `/recommend <goal>` — fuzzy-ask to concrete-command recommendation
+- `/reflect [--depth deep] [--validate]` — semantic validation that closes the loop
 
 ### Agents (20)
 

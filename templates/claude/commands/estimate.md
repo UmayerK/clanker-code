@@ -1,7 +1,7 @@
 ---
 name: estimate
 description: Development estimate for a task or feature with assumptions and risks.
-argument-hint: <task-or-feature-description>
+argument-hint: <task-or-feature-description> [--strategy systematic|agile|enterprise] [--uc]
 delegates-to: planner
 ---
 
@@ -22,3 +22,6 @@ Produce a ranged effort estimate with explicit assumptions, risks, and breakdown
 - Task breakdown with per-task ranges.
 - Total effort range and confidence.
 - Assumptions, risks, and recommended spikes.
+
+## MCP routing
+- **sequential-thinking**: decomposes scope into atomic tasks and reasons about risk-weighted ranges.

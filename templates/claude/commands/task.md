@@ -1,7 +1,7 @@
 ---
 name: task
 description: Orchestrate a complex multi-step task across agents and phases.
-argument-hint: <task-description>
+argument-hint: <task-description> [--strategy systematic|agile|enterprise] [--parallel] [--validate] [--uc]
 delegates-to: project-manager
 ---
 
@@ -22,3 +22,7 @@ Coordinate a multi-phase task by planning, delegating, and integrating results.
 - Phase-by-phase plan with assigned agents.
 - Artifacts produced per phase.
 - Final summary with status and remaining items.
+
+## MCP routing
+- **sequential-thinking**: plans phase ordering and gates progression on validation results.
+- **memory**: carries artifacts between phases and agents without re-deriving context.

@@ -1,7 +1,7 @@
 ---
 name: brainstorm
 description: Interactive requirements discovery through Socratic questioning, one question at a time.
-argument-hint: <topic-or-idea>
+argument-hint: <topic-or-idea> [--depth shallow|normal|deep] [--uc]
 delegates-to: planner
 ---
 
@@ -21,3 +21,7 @@ Elicit a complete, unambiguous feature brief by asking focused questions one at 
 ## Outputs
 - Structured feature brief ready to paste into `specs/10-feature-*.md`.
 - Implementation plan from `planner` with ordered, estimable steps.
+
+## MCP routing
+- **sequential-thinking**: structures the question sequence and tracks the evolving brief across turns.
+- **memory**: persists the running brief so context survives compaction or resumes.

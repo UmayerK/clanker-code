@@ -1,7 +1,7 @@
 ---
 name: help
 description: List available slash commands with short descriptions.
-argument-hint: [command-name]
+argument-hint: [command-name] [--uc]
 delegates-to:
 ---
 
@@ -21,3 +21,6 @@ Help the user discover commands and learn what each one does.
 ## Outputs
 - Command table or single-command detail view.
 - Quick-start pointers for common workflows.
+
+## MCP routing
+- No MCPs required: reads local command files only.

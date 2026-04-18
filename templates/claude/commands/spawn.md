@@ -1,7 +1,7 @@
 ---
 name: spawn
 description: Delegate a task to multiple parallel agents and merge results.
-argument-hint: <task-description> [--agents a,b,c]
+argument-hint: <task-description> [--agents a,b,c] [--parallel] [--uc]
 delegates-to: project-manager
 ---
 
@@ -23,3 +23,6 @@ Run several agents in parallel on independent slices of a task and integrate the
 - Merged artifacts from all agents.
 - Per-agent summary of what each produced.
 - Conflict log and resolution decisions.
+
+## MCP routing
+- **memory**: persists hand-off artifacts between parallel agents and the integrator.

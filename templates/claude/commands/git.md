@@ -1,7 +1,7 @@
 ---
 name: git
 description: Git operations with intelligent commit messages and safe defaults.
-argument-hint: <status|commit|branch|log|diff> [args]
+argument-hint: <status|commit|branch|log|diff> [args] [--uc]
 delegates-to:
 ---
 
@@ -23,3 +23,6 @@ Run common git operations with sensible defaults and auto-generated commit messa
 - Command output or formatted summary.
 - Drafted commit message when committing.
 - Warning if destructive flags were requested.
+
+## MCP routing
+- No MCPs required: runs local git via Bash.

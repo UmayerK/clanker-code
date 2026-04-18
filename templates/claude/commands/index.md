@@ -1,7 +1,7 @@
 ---
 name: index
 description: Generate a navigable project documentation index.
-argument-hint: [--output docs/INDEX.md]
+argument-hint: [--output docs/INDEX.md] [--depth shallow|normal|deep] [--uc]
 delegates-to: scribe
 ---
 
@@ -21,3 +21,7 @@ Produce a single index that maps the repository's structure, entry points, and k
 ## Outputs
 - Index file with grouped links and one-line descriptions.
 - List of undocumented modules needing READMEs.
+
+## MCP routing
+- **serena**: enumerates exported symbols and module boundaries semantically.
+- **memory**: caches the repository map so subsequent commands can reuse it.

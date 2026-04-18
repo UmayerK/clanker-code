@@ -18,6 +18,13 @@ This section is managed by `clanker-code`. Edits outside the `<!-- clanker-code:
 
 - **context7** — before using any framework API (Express/Fastify/Hono middlewares change behavior across versions).
 - **sequential-thinking** — for request-flow, middleware ordering, error-propagation analysis.
+- **serena** *(if configured)* — symbol-level refactors, find-usages, impact analysis. See `serena-semantic-editing` skill.
+
+## 2a. Working smart
+
+- **Auto-activate specialist mindsets** — security questions get OWASP lens, perf questions demand measurements, arch questions get ADR treatment. See `persona-auto-activation` skill.
+- **Global flags**: `--strategy systematic|agile|enterprise`, `--depth shallow|normal|deep`, `--parallel`, `--validate`, `--uc`. Flags compose. See `command-flags-spec` skill.
+- **Multi-agent work** uses wave orchestration (plan → build → verify). Entry points: `/pm`, `/spawn`. See `wave-orchestration` skill.
 
 ## 3. Testing
 
@@ -48,7 +55,7 @@ This section is managed by `clanker-code`. Edits outside the `<!-- clanker-code:
 
 ## 7. Commands
 
-`/brainstorm`, `/plan`, `/implement`, `/debug`, `/review`, `/test`, `/improve`, `/document`, `/design`, `/analyze`, `/mcp-help`, `/feat`, `/help`.
+`/brainstorm`, `/plan`, `/implement`, `/debug`, `/review`, `/test`, `/improve`, `/document`, `/design`, `/analyze`, `/index-repo`, `/select-tool`, `/pm`, `/recommend`, `/reflect`, `/mcp-help`, `/feat`, `/help`.
 
 ## 8. Specs
 

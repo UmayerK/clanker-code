@@ -7,6 +7,13 @@
     "memory",
     "playwright"
   ],
+  "conditionalDefaults": [
+    {
+      "mcp": "serena",
+      "requires": ["uv"],
+      "reason": "LSP-backed semantic code editing. Only auto-installs when uv is detected."
+    }
+  ],
   "mcps": {
     "sequential-thinking": {
       "name": "Sequential Thinking",

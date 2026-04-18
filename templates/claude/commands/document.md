@@ -1,7 +1,7 @@
 ---
 name: document
 description: Generate or update documentation for code, APIs, or features.
-argument-hint: <path-or-scope> [--kind api|readme|guide|jsdoc]
+argument-hint: <path-or-scope> [--kind api|readme|guide|jsdoc] [--depth shallow|normal|deep] [--uc]
 delegates-to: doc-writer
 ---
 
@@ -23,3 +23,7 @@ Produce accurate, audience-appropriate documentation for the given scope.
 - New or updated documentation files.
 - Working code examples aligned with current APIs.
 - List of undocumented items still needing coverage.
+
+## MCP routing
+- **context7**: pulls authoritative library docs so examples match current API surfaces.
+- **serena**: extracts symbol signatures, types, and references to document accurately.

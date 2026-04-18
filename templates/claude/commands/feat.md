@@ -1,7 +1,7 @@
 ---
 name: feat
 description: Full feature workflow: spec-first, implement, test, validate.
-argument-hint: <feature-name>
+argument-hint: <feature-name> [--strategy systematic|agile|enterprise] [--parallel] [--validate] [--uc]
 delegates-to: planner, frontend-builder or backend-builder, tester
 ---
 
@@ -22,3 +22,9 @@ Drive a feature end-to-end from spec creation through implementation and verifie
 - Completed spec file with checked acceptance criteria.
 - Implementation diff covering the spec.
 - Passing test suite with coverage summary.
+
+## MCP routing
+- **sequential-thinking**: coordinates the spec to implement to test wave with phase gates.
+- **memory**: carries spec, plan, and acceptance criteria across agents and sessions.
+- **serena**: navigates the codebase semantically during implementation.
+- **playwright**: exercises UI acceptance criteria end-to-end for validation.

@@ -1,7 +1,7 @@
 ---
 name: improve
 description: Refactor and quality improvements without changing behavior.
-argument-hint: <path-or-scope> [--goal readability|perf|types|tests]
+argument-hint: <path-or-scope> [--goal readability|perf|types|tests] [--strategy systematic|agile|enterprise] [--depth shallow|normal|deep] [--validate] [--uc]
 delegates-to: refactorer
 ---
 
@@ -23,3 +23,7 @@ Improve code quality in-place while preserving behavior and test coverage.
 - Refactored code with passing tests.
 - Before/after summary of complexity, size, or type coverage.
 - List of deferred improvements not taken.
+
+## MCP routing
+- **serena**: performs safe symbol-level renames, extractions, and reference lookups.
+- **sequential-thinking**: sequences refactor batches so each change remains behavior-preserving.

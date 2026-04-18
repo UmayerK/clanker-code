@@ -19,6 +19,13 @@ This section is managed by `clanker-code`. Edits outside the `<!-- clanker-code:
 - **context7** — always before touching a Next.js API you're not 100% certain about. Next changes fast.
 - **playwright** — non-negotiable for verifying pages render, forms submit, and routes navigate correctly.
 - **sequential-thinking** — for routing decisions, RSC vs client component boundaries, caching strategies.
+- **serena** *(if configured)* — LSP-backed semantic code editing; preferred for renames, find-usages, impact analysis. See `serena-semantic-editing` skill.
+
+## 2a. Working smart
+
+- **Auto-activate specialist mindsets** — security questions get an OWASP lens, perf questions demand measurements, architecture questions get ADR treatment. See `persona-auto-activation` skill. Don't wait for explicit `/agent` invocation.
+- **Global flags** (see `command-flags-spec` skill): `--strategy systematic|agile|enterprise`, `--depth shallow|normal|deep`, `--parallel`, `--validate`, `--uc` (ultracompressed). Flags compose.
+- **Multi-agent work** uses wave orchestration (plan → build → verify). Entry points: `/pm` and `/spawn`. See `wave-orchestration` skill.
 
 ## 3. Testing mandate
 
@@ -55,7 +62,7 @@ Test: happy path + empty state + error state.
 
 ## 7. Commands
 
-`/brainstorm`, `/plan`, `/implement`, `/debug`, `/review`, `/test`, `/improve`, `/document`, `/design`, `/analyze`, `/mcp-help`, `/feat`, `/help`.
+`/brainstorm`, `/plan`, `/implement`, `/debug`, `/review`, `/test`, `/improve`, `/document`, `/design`, `/analyze`, `/index-repo`, `/select-tool`, `/pm`, `/recommend`, `/reflect`, `/mcp-help`, `/feat`, `/help`.
 
 ## 8. Specs
 

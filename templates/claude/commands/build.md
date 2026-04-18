@@ -1,7 +1,7 @@
 ---
 name: build
 description: Build or compile the project with intelligent error handling.
-argument-hint: [--target dev|prod] [--clean]
+argument-hint: [--target dev|prod] [--clean] [--parallel] [--uc]
 delegates-to:
 ---
 
@@ -23,3 +23,6 @@ Run the project's build pipeline and surface actionable errors.
 - Build status (success or failure).
 - Parsed error list with file:line references on failure.
 - Suggested next action or applied fix.
+
+## MCP routing
+- No MCPs required: runs local build tooling via Bash.

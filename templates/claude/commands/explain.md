@@ -1,7 +1,7 @@
 ---
 name: explain
 description: Explain code, patterns, or concepts at an appropriate skill level.
-argument-hint: <code-path-or-concept> [--level beginner|intermediate|advanced]
+argument-hint: <code-path-or-concept> [--level beginner|intermediate|advanced] [--depth shallow|normal|deep] [--uc]
 delegates-to: mentor
 ---
 
@@ -23,3 +23,7 @@ Deliver a clear, level-appropriate explanation with examples the user can run.
 - Structured explanation with summary, walkthrough, example.
 - Runnable snippet when applicable.
 - Suggested follow-up topics.
+
+## MCP routing
+- **context7**: fetches authoritative docs for libraries, frameworks, and APIs being explained.
+- **sequential-thinking**: orders concept layers from mental model to worked example.
