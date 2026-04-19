@@ -1,7 +1,7 @@
 {
   "statusLine": {
     "type": "command",
-    "command": "npx -y ccusage statusline"
+    "command": "node .claude/scripts/statusline.js"
   },
   "hooks": {
     "SessionStart": [

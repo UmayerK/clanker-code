@@ -92,7 +92,7 @@
     },
     "serena": {
       "name": "Serena",
-      "publisher": "oraios (community)",
+      "publisher": "community",
       "category": "code-intelligence",
       "description": "LSP-backed semantic code editing across languages. Powerful for refactoring.",
       "local": true,
@@ -123,9 +123,9 @@
     },
     "sqlite": {
       "name": "SQLite",
-      "publisher": "jparkerweb (community)",
+      "publisher": "community",
       "category": "database",
-      "description": "Local SQLite database access (Anthropic's official SQLite MCP is archived; this is the maintained alternative).",
+      "description": "Local SQLite database access — actively maintained.",
       "local": true,
       "requiresSignup": false,
       "requiresKey": false,
@@ -152,7 +152,7 @@
     },
     "codesight-mcp": {
       "name": "Codesight",
-      "publisher": "cmillstead (community)",
+      "publisher": "community",
       "category": "code-intelligence",
       "description": "Tree-sitter AST, 66 languages, 34 tools, 2,495 tests, 6-step path validation, byte-offset retrieval. Claims ~99% token reduction on repo-wide retrieval. Hardened.",
       "local": true,
@@ -168,7 +168,7 @@
     },
     "code-graph-mcp": {
       "name": "Code Graph",
-      "publisher": "sdsrss (community)",
+      "publisher": "community",
       "category": "code-intelligence",
       "description": "AST-backed code knowledge graph (10 languages). Claims 6-49x token reduction on repo-wide review and impact analysis. Complements Serena.",
       "local": true,
@@ -184,7 +184,7 @@
     },
     "code-review-graph": {
       "name": "Code Review Graph",
-      "publisher": "tirth8205 (community)",
+      "publisher": "community",
       "category": "code-intelligence",
       "description": "Tree-sitter AST + local SQLite graph, tuned for code review. Claims 6.8-49x token reduction on diff review.",
       "local": true,

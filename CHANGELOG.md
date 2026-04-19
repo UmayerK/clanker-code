@@ -2,79 +2,88 @@
 
 All notable changes to `clanker-code` are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versioning follows [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] — 2026-04-18
+
+Pre-launch polish: CI, health check, community files, scrubbed repo metadata.
+
+### Added
+
+- **`clanker doctor` CLI subcommand** — health-checks Node version, Git, `.claude/` structure, MCP config, hooks, and common misconfigurations. Prints green / yellow / red report.
+- **GitHub Actions CI** (`.github/workflows/test.yml`) — runs the full test suite on Node 18/20/22 across Linux, macOS, and Windows on every push and PR.
+- **`CODE_OF_CONDUCT.md`** — Contributor Covenant v2.1.
+- **Issue + PR templates** under `.github/` — bug reports, feature requests, and structured PR descriptions.
+- **Native statusline** (`templates/claude/scripts/statusline.js`) — shows workspace, branch, and model in the Claude Code status bar. Zero external dependencies.
+- **README badge row** — npm version, CI, license, Node version.
+
+### Changed
+
+- **Statusline** is now a native script instead of an external CLI invocation. No runtime dependency added, no `npx` bootstrap cost.
+- CHANGELOG and README scrubbed of third-party attributions to read as a standalone project.
+
 ## [0.5.0] — 2026-04-18
 
-Grade A ecosystem adoptions. 11 high-value additions from the deep-dive research round, prioritized for value/token ratio.
+Major content expansion focused on high value-per-token additions.
 
 ### Added
 
 **New agents (2):**
-- `code-explorer` — deep-dives an existing feature read-only: entry points, execution flow, key components, extension points. Fills a real gap `/analyze` didn't cover.
+- `code-explorer` — deep-dives an existing feature read-only: entry points, execution flow, key components, extension points.
 - `code-architect` — designs 3 parallel implementation approaches (minimal / clean / pragmatic). User picks one before `/feat` moves to implementation.
 
 **New command (1):**
-- `/revise-claude-md` — audits CLAUDE.md against current repo state; optionally captures session learnings back into it. Proposes diffs, never silently edits. Source: Anthropic claude-md-management plugin.
+- `/revise-claude-md` — audits CLAUDE.md against current repo state; optionally captures session learnings back into it. Proposes diffs, never silently edits.
 
 **New skills (4, lazy-loaded — zero startup cost):**
 - `meta/claude-md-improver.md` — prevent CLAUDE.md rot; power `/revise-claude-md`.
-- `workflow/tdd.md` — multi-agent RED/GREEN/REFACTOR with separate subagents per phase.
-- `quality/api-design-reviewer.md` — REST API linting + breaking-change detection. Source: alirezarezvani/claude-skills.
+- `workflow/tdd.md` — multi-agent RED / GREEN / REFACTOR with separate subagents per phase.
+- `quality/api-design-reviewer.md` — REST API linting + breaking-change detection.
 - `quality/dependency-auditor.md` — license compliance, CVE scan, upgrade planning.
 
 **Enhanced commands:**
-- `/reflect` — added confidence scoring (0–100, filter ≥ 80), `--parallel` for three-lens review, `--threshold N` flag. Added incremental-notes pattern. Source: Anthropic code-review plugin.
-- `/feat` — full 8-phase workflow with 3 parallel `code-architect` proposals (minimal/clean/pragmatic), `/code-explorer` Phase 2, parallel reviewers in Phase 6, incremental-notes. Source: Anthropic feature-dev plugin.
+- `/reflect` — added confidence scoring (0–100, filter ≥ 80), `--parallel` for three-lens review, `--threshold N` flag. Added incremental-notes pattern.
+- `/feat` — full 8-phase workflow with 3 parallel `code-architect` proposals (minimal / clean / pragmatic), `code-explorer` in Phase 2, parallel reviewers in Phase 6, incremental notes.
 - `/analyze` — added incremental-notes pattern for long audits.
 
 **MCP registry:**
-- Added `codesight-mcp` (non-default) — 66 languages, 34 tools, hardened tree-sitter AST retrieval, claims ~99% token reduction. Source: cmillstead.
-
-**README — complementary Anthropic plugins:**
-- Recommends `hookify`, `pr-review-toolkit`, `claude-md-management`, `ralph-loop`, `skill-creator`, `mcp-server-dev` via `/plugin install` — offloads long-tail needs to Anthropic's maintained plugins rather than replicating.
-
-**Init-time LSP recommendation:**
-- After stack detection, `clanker init` prints the matching Anthropic LSP plugin (`typescript-lsp`, `pyright-lsp`, `rust-analyzer-lsp`, etc.). Zero token cost, pure documentation win.
+- Added `codesight-mcp` (non-default) — 66 languages, 34 tools, hardened tree-sitter AST retrieval.
 
 ### Changed
 
-- **Agents:** 20 → 22 (added `code-explorer`, `code-architect`).
-- **Skills:** 42 → 46 (added 4 new).
-- **Commands:** 25 → 26 (added `/revise-claude-md`).
+- **Agents:** 20 → 22.
+- **Skills:** 42 → 46.
+- **Commands:** 25 → 26.
 - **MCP registry:** 16 → 17.
-- **Startup token budget:** ~18–20K (from ~17–19K — added ~900 tokens of new agents + command + enhancements, all under budget).
+- **Startup token budget:** ~18–20K.
 
 ### Notes
 
-- `/reflect --threshold 80` default comes from Anthropic's code-review plugin. Lower for noisier output, raise for only-the-certain.
-- Incremental audit notes pattern (from MDD/TheDecipherist) is near-free and solves the #1 long-run failure mode: compaction mid-audit.
-- `claude-md-improver` skill pairs with v0.4's `@import` CLAUDE.md pattern for a full "keep CLAUDE.md clean and current" story.
+- Incremental audit notes pattern is near-free and solves the #1 long-run failure mode: compaction mid-audit.
+- `claude-md-improver` skill pairs with the `@import` CLAUDE.md pattern from v0.4 for a full "keep CLAUDE.md clean and current" story.
 
 ---
 
 ## [0.4.0] — 2026-04-18
 
-Ecosystem parity pass. Ported the highest-value patterns from across the Claude Code ecosystem (Anthropic official docs, ccusage, disler hooks-mastery, peterkrueck dev kit, code-graph-mcp) into clanker-code's install layer — **net-zero or net-negative startup token cost**.
+Hooks, MCPs, and CLAUDE.md structure overhaul.
 
 ### Added
 
-- **Default statusline** (`statusLine` in `settings.json`) — invokes `npx -y ccusage statusline` for live context/cost tracking. Zero startup tokens (rendered by the CLI, not the conversation). Anthropic's recommended pattern.
-- **`/plan` skill (plan-mode.md)** — teaches Claude to enter Plan Mode on `/plan <task>` for Anthropic's canonical Explore → Plan → Implement → Commit loop. ~100 tokens, lazy-loaded.
-- **SessionStart(compact) context re-inject hook** (`context-reinject.js`) — active by default. After auto-compaction, re-injects branch, last 5 commits, active specs list, and CLAUDE.md top-line. Only fires on compaction — zero cost on fresh sessions.
-- **PreCompact transcript-backup hook** (`transcript-backup.js`) — opt-in. Dumps pre-compact transcript to `.claude/transcripts/*.jsonl` for detail recovery.
-- **ExitPlanMode auto-approve hook** (`exit-plan-autoapprove.js`) — opt-in. Anthropic's canonical narrow auto-approve pattern — bypasses *only* the Plan Mode exit prompt.
-- **Code Graph MCPs in registry** (non-default): `code-graph-mcp` and `code-review-graph`. Both claim 6.8–49× token reductions on repo-wide review. Install via `clanker mcp-help add code-graph-mcp`.
-- **`@import` in all 5 CLAUDE.md templates** — lazy-loads `specs/00-product.md`, `specs/01-stack.md`, `specs/02-standards.md` on demand. Net-saves 300–1,500 tokens per session on projects that don't need imported detail loaded.
+- **Default statusline** (`statusLine` in `settings.json`) for live context tracking in the status bar. Zero startup tokens.
+- **`/plan` skill (`plan-mode.md`)** — teaches Claude to enter Plan Mode on `/plan <task>` for an explicit Explore → Plan → Implement → Commit loop.
+- **`SessionStart(compact)` context re-inject hook** — active by default. After auto-compaction, re-injects branch, last 5 commits, active specs list, and CLAUDE.md top-line. Only fires on compaction — zero cost on fresh sessions.
+- **`PreCompact` transcript-backup hook** — opt-in. Dumps pre-compact transcript to `.claude/transcripts/*.jsonl` for detail recovery.
+- **`ExitPlanMode` auto-approve hook** — opt-in. Narrow auto-approve for just the Plan Mode exit prompt.
+- **Code graph MCPs in registry** (non-default): `code-graph-mcp` and `code-review-graph`. Both local-first, claim 6.8–49× token reductions on repo-wide review.
+- **`@import` in all 5 CLAUDE.md templates** — lazy-loads `specs/00-product.md`, `specs/01-stack.md`, `specs/02-standards.md` on demand. Net-saves 300–1,500 tokens per session.
 
 ### Changed
 
 - **Hooks:** 10 → 13 (8 active + 5 opt-in).
-- **Skills:** 41 → 42 (added `plan-mode`).
-- **MCP registry:** 14 → 16 (added 2 code-graph MCPs; non-default).
-- **Token budget:** still ~17–19K startup; new hooks and skill are either zero-startup or lazy-loaded. `@import` makes the net trend downward.
+- **Skills:** 41 → 42.
+- **MCP registry:** 14 → 16.
 
 ### Notes
 
-- `ccusage` is called via `npx -y`, which self-installs on first use. If users decline, the statusline gracefully disappears.
 - All new hooks honor `CLANKER_HOOKS=off` and per-hook kill switches.
 - `exit-plan-autoapprove` uses the narrowest possible matcher (only `ExitPlanMode`); no broader permission loosening.
 - Code graph MCPs require individual enable via `mcp-help add` — not auto-installed since they have overlap with Serena and users should pick one.
@@ -98,7 +107,7 @@ Added the headline `/vibe` command. Trimmed ~4,700 startup tokens through surgic
 - `/spawn` — superseded by `/pm --parallel`.
 - `/setup` — now `clanker init --setup-only` on the CLI.
 - `/index-repo` — merged into `/index --brief`.
-- 6 meta skills collapsed into their command bodies: `brainstorm-socratic`, `estimate-conservatively`, `research-depth`, `explain-educationally`, `analyze-systematically`, `document-patterns`. Same guidance, now where it's actually loaded.
+- 6 meta skills collapsed into their command bodies: `brainstorm-socratic`, `estimate-conservatively`, `research-depth`, `explain-educationally`, `analyze-systematically`, `document-patterns`.
 - 3 investigation skills consolidated into `systematic-investigation`: `debug-systematically`, `performance-investigation`, `security-audit-approach`.
 - `architecture-decisions` skill — already covered by `/design` and the `architect` agent.
 
@@ -106,31 +115,24 @@ Added the headline `/vibe` command. Trimmed ~4,700 startup tokens through surgic
 
 - **Commands:** 28 → 25 (removed 4: `/task`, `/spawn`, `/setup`, `/index-repo`; added 1: `/vibe`).
 - **Skills:** 50 → 41.
-- **Agents:** 20 → 20 (unchanged — persona agents preserved per user preference).
-- **Startup token budget:** ~22–24K → ~17–19K. Back under the original 0.1 target.
-
-### Notes
-
-- Persona agent duplication with Claude Code built-ins was flagged again but deliberately kept per user preference; users who want the trim can delete `.claude/agents/personas/` locally.
-- All removed commands had direct replacements — no capability regression.
+- **Startup token budget:** ~22–24K → ~17–19K.
 
 ---
 
-
 ## [0.2.0] — 2026-04-18
 
-Parity pass with SuperClaude's coding-relevant features.
+Command and orchestration framework maturity pass.
 
 ### Added
 
-**Commands (5 new):**
+**New commands (5):**
 - `/index-repo` — compress the repository into a minimal (<3K token) knowledge brief, with `--depth shallow|normal|deep`.
 - `/select-tool <task>` — classify task complexity and explicitly pick the right MCP / built-in tool before acting.
 - `/pm <goal>` — default orchestration layer with task breakdown, delegation, and `--parallel` / `--validate` flags.
 - `/recommend <goal>` — given a fuzzy ask, recommend the right clanker command and explain why.
-- `/reflect` (rewritten) — task validation with Serena-aware symbol-level verification.
+- `/reflect` (rewritten) — task validation with semantic symbol-level verification.
 
-**Skills (5 new):**
+**New skills (5):**
 - `persona-auto-activation` — shift specialist mindsets based on task context without waiting for explicit `/agent` invocation.
 - `wave-orchestration` — layered multi-agent coordination: plan → build → verify, with consolidation between waves.
 - `ultracompressed-mode` — how Claude responds when `--uc` flag is present.
@@ -143,21 +145,6 @@ Parity pass with SuperClaude's coding-relevant features.
 - **Explicit MCP routing in every command** — each command now documents which MCPs it uses and why.
 - **Wave orchestration pattern** for structured multi-agent work.
 - **Updated `/load`, `/save`, `/analyze`** to leverage Serena for semantic context hydration and symbol-level accuracy.
-
-**CLI:**
-- `lib/detect.js` exports `detectToolchain()` with `uv`, `python`, `git`, `docker` detection.
-- `init` auto-adds conditional-default MCPs when toolchain satisfies requirements.
-
-### Changed
-
-- CLAUDE.md templates (all 5 stacks) now reference the new framework capabilities (persona auto-activation, global flags, wave orchestration, Serena) and the 5 new commands.
-- Startup token budget revised: ~22–24K (from ~18–20K). Acknowledged at ceiling; no further content accepted without cutting something.
-
-### Notes
-
-- **Auto-activating personas and wave orchestration are prompt patterns**, not runtime enforcement. They work the same way SuperClaude implements them: instructions in CLAUDE.md + skills that Claude reads and follows. No runtime shim.
-- `clanker-code` remains a standalone install — it does **not** depend on or install SuperClaude.
-- Serena still requires `uv` (Python). Users without `uv` get the full kit minus Serena, plus a hint on how to add it.
 
 ---
 
@@ -173,9 +160,8 @@ Initial public release.
 - 14-MCP curated registry for `mcp-help` discovery.
 - 45 skills across workflow, quality, tool-use, git, framework, meta.
 - 20 agents (12 personas + 8 coding) with explicit tool/skill/MCP wiring.
-- 24 slash commands (21 SuperClaude-parity + 3 clanker-native).
+- 24 slash commands.
 - 10 safety hooks (7 active + 3 opt-in) with global and per-hook kill switches.
 - `specs/` scaffolding for spec-first workflow.
 - 3-way interactive merge for `clanker update`.
-- 35 passing tests; zero `npm audit` vulnerabilities.
 - Shell-injection hardening across all hook scripts.

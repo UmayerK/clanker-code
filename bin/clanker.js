@@ -2,6 +2,7 @@
 import { init } from '../lib/commands/init.js';
 import { update } from '../lib/commands/update.js';
 import { mcpHelp } from '../lib/commands/mcp-help.js';
+import { doctor } from '../lib/commands/doctor.js';
 import pc from 'picocolors';
 
 const [, , cmd, ...rest] = process.argv;
@@ -13,6 +14,7 @@ const commands = {
   init: () => init({ flags, args }),
   update: () => update({ flags, args }),
   'mcp-help': () => mcpHelp({ flags, args, subcommand: args[0] }),
+  doctor: () => doctor({ flags, args }),
   help: printHelp,
   '--help': printHelp,
   '-h': printHelp,
@@ -32,6 +34,7 @@ ${pc.bold('Commands:')}
   ${pc.cyan('init')}              Install clanker-code into the current repo
   ${pc.cyan('update')}            Interactive merge with the latest shipped version
   ${pc.cyan('mcp-help')}          Discover, install, or remove MCPs
+  ${pc.cyan('doctor')}            Health-check clanker-code + the current project
   ${pc.cyan('help')}              Show this message
   ${pc.cyan('version')}           Show version
 

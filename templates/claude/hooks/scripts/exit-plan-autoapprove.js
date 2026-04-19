@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // PreToolUse hook (opt-in). Auto-approves the ExitPlanMode permission prompt only.
-// This is the safest auto-approve pattern Anthropic documents — narrow matcher,
-// permission dialog disappears, no security loosening beyond Plan Mode's own guarantees.
+// Narrow matcher: the permission dialog disappears without loosening security
+// beyond Plan Mode's own guarantees.
 //
 // Event: PreToolUse · Matcher: ExitPlanMode
 // Enable with: CLANKER_HOOKS_EXTRA=on (or CLANKER_HOOK_EXIT_PLAN_AUTOAPPROVE=on for just this one)

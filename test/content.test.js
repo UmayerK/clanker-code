@@ -74,3 +74,12 @@ describe('shipped content — hook scripts are present', () => {
     for (const e of expected) assert.ok(files.includes(e), `${e} exists`);
   });
 });
+
+describe('shipped content — native statusline', () => {
+  test('statusline script ships with templates and is self-contained', async () => {
+    const statusline = join(templatesDir, 'claude', 'scripts', 'statusline.js');
+    const raw = await readFile(statusline, 'utf8');
+    assert.ok(raw.includes('process.stdout.write'), 'statusline produces output');
+    assert.ok(!/\bnpx\s/.test(raw), 'statusline does not shell out via npx');
+  });
+});

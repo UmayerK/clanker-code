@@ -1,6 +1,11 @@
 # clanker-code
 
-**The Claude Code starter kit. One command. Ready to ship.**
+[![npm version](https://img.shields.io/npm/v/clanker-code.svg)](https://www.npmjs.com/package/clanker-code)
+[![CI](https://github.com/UmayerK/clanker-code/actions/workflows/test.yml/badge.svg)](https://github.com/UmayerK/clanker-code/actions/workflows/test.yml)
+[![license](https://img.shields.io/npm/l/clanker-code.svg)](./LICENSE)
+[![node](https://img.shields.io/node/v/clanker-code.svg)](./package.json)
+
+**Claude Code in one command. Batteries, hooks, and guardrails included.**
 
 `clanker-code` transforms any repository into a fully-configured Claude Code workspace in under a minute. It installs curated skills, specialized agents, slash commands, safety hooks, and pre-wired local-first MCPs — all tuned for one thing: shipping code.
 
@@ -17,12 +22,12 @@ claude
 That's it. Your repo now has:
 
 - **4 pre-wired local-first MCPs** (+ Serena auto-added if `uv` is detected) — no signup, no API keys
-- **25 slash commands** — headlined by `/vibe` (fuzzy idea → working app, end to end), plus `/brainstorm`, `/implement`, `/debug`, `/review`, `/test`, `/feat`, `/select-tool`, `/pm`, `/recommend`, `/reflect`, `/mcp-help`, and more
-- **20 specialized agents** — frontend-builder, backend-builder, debugger, reviewer, planner, tester, security-engineer, architect, and 12 more
-- **41 curated skills** — workflow, quality, security, git, framework-specific, plus framework patterns (persona auto-activation, wave orchestration, global flags, UC mode, Serena usage)
+- **26 slash commands** — headlined by `/vibe` (fuzzy idea → working app, end to end), plus `/brainstorm`, `/implement`, `/debug`, `/test`, `/feat`, `/select-tool`, `/pm`, `/recommend`, `/reflect`, `/revise-claude-md`, `/mcp-help`, and more
+- **22 specialized agents** — frontend-builder, backend-builder, debugger, reviewer, planner, tester, code-explorer, code-architect, security-engineer, architect, and 13 more
+- **46 curated skills** — workflow, quality, security, git, framework-specific, plus framework patterns (persona auto-activation, wave orchestration, global flags, UC mode, semantic editing, TDD, API design review, dependency audits, CLAUDE.md maintenance)
 - **Global command flags** — `--strategy systematic|agile|enterprise`, `--depth shallow|normal|deep`, `--parallel`, `--validate`, `--uc` (ultracompressed)
 - **8 safety + ergonomics hooks** — auto-format, destructive-command guard, secret-leak guard, spec-awareness, git-context, SessionStart(compact) re-inject, and more (plus 5 opt-in)
-- **Default statusline via `npx ccusage statusline`** — live context and cost tracking in your status bar (Anthropic's recommended pattern)
+- **Native statusline** — branch, workspace, and model visible in your terminal
 - **Stack-tailored `CLAUDE.md`** — auto-detects Next.js, React, Node API, Python API, and more
 - **`specs/` scaffolding** — spec-first workflow out of the box
 
@@ -32,7 +37,7 @@ That's it. Your repo now has:
 /vibe a team todo app with daily standup summaries
 ```
 
-One command. Claude asks a few clarifying questions (Socratic, one at a time), writes the spec, plans it, builds it in parallel across specialized agents, tests with Playwright, reviews against OWASP and project standards, and stops with a suggested commit message. No auto-commits, no auto-pushes — you stay in control.
+One command. Claude asks a few clarifying questions (Socratic, one at a time), writes the spec, plans it, builds it in parallel across specialized agents, tests with a real browser, reviews against OWASP and project standards, and stops with a suggested commit message. No auto-commits, no auto-pushes — you stay in control.
 
 ---
 
@@ -42,18 +47,14 @@ Claude Code is powerful — and it ships as a blank slate. Every developer reinv
 
 `clanker-code` is the missing install layer. One command. Opinionated defaults. Zero dotfiles to copy-paste.
 
-### Compared to alternatives
+### Why clanker-code
 
-| | Manual setup | SuperClaude | **clanker-code** |
-|---|---|---|---|
-| One-command install | No | Python (pip) | **npm (npx)** |
-| Pre-wired MCPs | No | No | **Yes** |
-| Framework detection | No | No | **Yes** |
-| Safety hooks out of box | No | No | **Yes** |
-| MCP discovery command | No | No | **Yes** |
-| Cross-platform (Win/Mac/Linux) | Manual | Manual | **Yes** |
-| Interactive update (3-way merge) | No | No | **Yes** |
-| Coding workflows focused | Manual | Meta-heavy | **Yes** |
+- **One command to ship-ready** — `npx clanker-code init` and you're done.
+- **Curated, not maximal** — every skill/agent/command/hook earns its slot. Startup token budget is deliberately kept under ~20K.
+- **Safety-first** — destructive-command guard, secret-leak guard, gitignore warnings, and SessionStart re-inject ship active by default.
+- **Framework-aware** — detects Next.js, React, Node APIs, Python APIs, Rust, Go; installs only the content relevant to your stack.
+- **Interactive updates** — `clanker update` does a 3-way merge so your customizations survive upgrades.
+- **Cross-platform** — native Windows, WSL, macOS, Linux. No Python or Bun dependencies.
 
 ---
 
@@ -65,6 +66,7 @@ npx clanker-code init
 
 # Common variants
 npx clanker-code init --minimal         # CLAUDE.md + specs/ only
+npx clanker-code init --setup-only      # specs/ scaffolding only
 npx clanker-code init --no-mcps         # skip MCP configuration
 npx clanker-code init --no-hooks        # skip hook configuration
 npx clanker-code init --force           # overwrite without prompting
@@ -80,6 +82,9 @@ npx clanker-code mcp-help search <query> # search registry
 npx clanker-code mcp-help show <name>    # details + setup instructions
 npx clanker-code mcp-help add <name>     # guided install (prompts for keys)
 npx clanker-code mcp-help remove <name>  # uninstall
+
+# Health check
+npx clanker-code doctor
 
 # Meta
 npx clanker-code help
@@ -102,22 +107,23 @@ All local-first, no signup, no API keys.
 | `playwright` | Real browser automation for UI verification (downloads Chromium on first use) |
 | `serena` *(auto-added if `uv` is installed)* | LSP-backed semantic code editing — renames, find-usages, impact analysis |
 
-If `uv` is not installed, Serena is skipped (with a hint for how to enable it later). Install `uv` at https://docs.astral.sh/uv/ then run `npx clanker-code mcp-help add serena`.
+If `uv` is not installed, Serena is skipped with a hint for how to enable it. Install `uv`, then run `npx clanker-code mcp-help add serena`.
 
-Need more? `clanker mcp-help` has a curated registry of 14+ MCPs across categories — databases, code intelligence, GitHub, Notion, Linear, Figma, and more — with guided setup for anything needing an API key.
+Need more? `clanker mcp-help` has a curated registry of 17+ MCPs across categories — databases, code intelligence, GitHub, Notion, Linear, Figma, and more — with guided setup for anything needing an API key.
 
 ### Hooks
 
-**Active by default (7):**
+**Active by default (8):**
 
 | Hook | What it does |
 |---|---|
 | Destructive Bash guard | Blocks `rm -rf /`, force-push to main, `DROP TABLE`, fork bombs, mkfs, dd-to-device |
-| Secret leak guard | Blocks writing content with Anthropic/OpenAI/GitHub/Stripe/AWS/Google/Slack keys |
+| Secret leak guard | Blocks writing content with common API key patterns |
 | Gitignore warning | Warns before writing to gitignored paths (prevents lost work in `.env`, `build/`) |
 | Auto-format | Runs detected formatter (prettier, biome, ruff, black) on edited files |
 | Spec-awareness | Injects `specs/` file list into context automatically |
 | Git context | Injects current branch + `git status --short` into every prompt |
+| SessionStart(compact) re-inject | Re-injects project context after auto-compaction |
 | Stop notification | Terminal bell + OS notification when a long task completes |
 
 **Opt-in via `CLANKER_HOOKS_EXTRA=on`:**
@@ -125,6 +131,8 @@ Need more? `clanker mcp-help` has a curated registry of 14+ MCPs across categori
 - Session log on Stop (appends to `.claude/sessions/YYYY-MM-DD.md`)
 - Auto-typecheck after TS edits (background `tsc --noEmit`)
 - Package install reminder after `package.json` changes
+- PreCompact transcript backup
+- ExitPlanMode auto-approve
 
 **Kill switches:**
 - `CLANKER_HOOKS=off` — disable all clanker hooks globally
@@ -132,7 +140,7 @@ Need more? `clanker mcp-help` has a curated registry of 14+ MCPs across categori
 
 ### Slash commands
 
-25 commands. Every command supports the global flag set (`--strategy`, `--depth`, `--parallel`, `--validate`, `--uc`).
+26 commands. Every command supports the global flag set (`--strategy`, `--depth`, `--parallel`, `--validate`, `--uc`).
 
 ```
 /vibe         /brainstorm   /implement    /analyze      /debug
@@ -140,31 +148,34 @@ Need more? `clanker mcp-help` has a curated registry of 14+ MCPs across categori
 /cleanup      /estimate     /explain      /git          /index
 /load         /save         /reflect      /help         /research
 /mcp-help     /feat         /select-tool  /pm           /recommend
+/revise-claude-md
 ```
 
 **Power commands:**
 
 - `/vibe <idea>` — **fuzzy idea → complete working app**, end to end
-- `/pm <goal>` — multi-agent orchestration (replaces `/task` and `/spawn`)
+- `/feat <name>` — focused feature workflow with 3 parallel design approaches (minimal/clean/pragmatic)
+- `/pm <goal>` — multi-agent orchestration with task breakdown
 - `/select-tool <task>` — explicit MCP/tool selection based on task complexity
 - `/recommend <goal>` — fuzzy-ask to concrete-command recommendation
-- `/reflect [--depth deep] [--validate]` — semantic validation that closes the loop
+- `/reflect [--depth deep] [--validate]` — semantic validation with confidence scoring
 - `/index --brief` — compress repo into a <3K-token brief for cheap downstream context
+- `/revise-claude-md` — audit and refresh CLAUDE.md against current codebase
 
-### Agents (20)
+### Agents (22)
 
 **12 persona agents:** architect, analyzer, frontend-engineer, backend-engineer, security-engineer, devops-engineer, performance-engineer, quality-engineer, mentor, refactorer, scribe, project-manager
 
-**8 coding agents:** frontend-builder, backend-builder, debugger, reviewer, planner, tester, doc-writer, refactor-executor
+**10 coding agents:** frontend-builder, backend-builder, debugger, reviewer, planner, tester, doc-writer, refactor-executor, code-explorer, code-architect
 
-### Skills (~45)
+### Skills (46)
 
-- **Workflow (6):** plan-before-coding, debug-systematically, test-before-commit, review-own-diff, incremental-refactor, ask-before-assuming
-- **Quality & security (5):** OWASP top 10, input validation, secrets hygiene, a11y basics, perf budget
-- **Tool-use (4):** when to reach for Playwright, Context7, sequential-thinking, memory
+- **Workflow (8):** plan-before-coding, plan-mode, debug-systematically → systematic-investigation, test-before-commit, review-own-diff, incremental-refactor, ask-before-assuming, tdd
+- **Quality & security (7):** OWASP top 10, input validation, secrets hygiene, a11y basics, perf budget, api-design-reviewer, dependency-auditor
+- **Tool-use (5):** when to reach for Playwright, Context7, sequential-thinking, memory, semantic editing
 - **Git (3):** conventional commits, small focused PRs, PR description template
 - **Framework-aware (16):** Next.js, React, API patterns, FastAPI, Django, Flask, Prisma, Tailwind, TypeScript, pytest, and more — only loaded if detected
-- **Meta (11):** systematic analysis, Socratic brainstorming, estimation, research depth, architecture decisions, and more
+- **Meta (7):** persona auto-activation, wave orchestration, ultracompressed mode, command-flags-spec, serena-semantic-editing, claude-md-improver, and more
 
 ---
 
@@ -205,9 +216,10 @@ All opt-outs via environment variables (no config file needed):
 | Variable | Effect |
 |---|---|
 | `CLANKER_HOOKS=off` | Disable all clanker hooks globally |
-| `CLANKER_HOOKS_EXTRA=on` | Enable opt-in hooks (session log, typecheck, pkg-install) |
+| `CLANKER_HOOKS_EXTRA=on` | Enable opt-in hooks (session log, typecheck, pkg-install, transcript backup, ExitPlanMode auto-approve) |
 | `CLANKER_HOOK_<NAME>=off` | Disable a specific hook by name |
 | `CLANKER_NOTIFY_THRESHOLD_MS` | Override stop-notify threshold (default: 30000ms) |
+| `CLANKER_HOOK_CONTEXT_REINJECT_ALWAYS=on` | Re-inject on every SessionStart, not just `compact` |
 | `CLANKER_DEBUG=1` | Show stack traces on CLI errors |
 
 ---
@@ -231,9 +243,6 @@ See [`SECURITY.md`](./SECURITY.md) for the full security policy and vulnerabilit
 
 ## FAQ
 
-**Does this replace SuperClaude?**
-No. clanker-code is *inspired by* SuperClaude's command taxonomy and ships 21 parity commands, but focuses tightly on coding workflows and adds MCPs + hooks + framework awareness that SuperClaude doesn't. You can use both together.
-
 **Does clanker-code work on Windows?**
 Yes — native Windows, WSL, and Mac/Linux are all supported. The CLI is cross-platform Node.js with no native deps.
 
@@ -244,7 +253,7 @@ Yes — native Windows, WSL, and Mac/Linux are all supported. The CLI is cross-p
 Delete `.claude/`, `.mcp.json`, and the clanker-code section of `CLAUDE.md` (between the `<!-- clanker-code:start -->` / `<!-- clanker-code:end -->` markers).
 
 **Does Playwright really need 150MB?**
-Only on first use — Playwright downloads Chromium when you run it the first time. You can pre-download with `npx playwright install chromium`, or skip Playwright entirely with `npx clanker-code init` and remove the playwright entry from `.mcp.json`.
+Only on first use — Playwright downloads Chromium when you run it the first time. You can pre-download with `npx playwright install chromium`, or skip Playwright entirely with `npx clanker-code init --no-mcps` and add what you want via `mcp-help`.
 
 **How do I add a team-specific skill or command?**
 After `init`, `.claude/skills/` and `.claude/commands/` are yours to edit. Your changes persist through `clanker update` unless the file was shipped by clanker and you didn't modify it.
@@ -252,32 +261,10 @@ After `init`, `.claude/skills/` and `.claude/commands/` are yours to edit. Your 
 **Can I use clanker-code in a private repo?**
 Yes. The CLI reads only your project files locally. Nothing is uploaded.
 
+**Is `clanker doctor` a real command?**
+Yes — it sanity-checks your Node version, shipped content, MCP servers, and common misconfigurations. Run it any time something feels off.
+
 ---
-
-## Complementary Anthropic plugins (install via `/plugin`)
-
-`clanker-code` deliberately does not reinvent what Anthropic already ships as official plugins. For deeper capability, complement clanker with:
-
-- **`/plugin install hookify@anthropic-official`** — create custom hooks from natural-language rules. The 80/20 answer for "I want Claude to always/never do X."
-- **`/plugin install pr-review-toolkit@anthropic-official`** — specialist PR-review agents (comments, tests, error handling, type design, simplification).
-- **`/plugin install claude-md-management@anthropic-official`** — the upstream version of clanker's `claude-md-improver` skill + `/revise-claude-md` command.
-- **`/plugin install ralph-loop@anthropic-official`** — iterate-until-complete workflow loop.
-- **`/plugin install skill-creator@anthropic-official`** — author your own skills with evals and benchmarks.
-- **`/plugin install mcp-server-dev@anthropic-official`** — build MCP servers in TypeScript or Python.
-
-### Matching LSP plugin (auto-suggested on `init`)
-
-For deeper semantic code awareness, install the LSP plugin matching your detected stack:
-
-| Stack | Plugin |
-|---|---|
-| Next.js / React / TypeScript | `/plugin install typescript-lsp@anthropic-official` |
-| Python | `/plugin install pyright-lsp@anthropic-official` |
-| Rust | `/plugin install rust-analyzer-lsp@anthropic-official` |
-| Go | `/plugin install gopls-lsp@anthropic-official` |
-| Ruby / PHP / Java / C# / Swift / Kotlin / Lua / C++ | `/plugin install <lang>-lsp@anthropic-official` |
-
-`clanker init` prints the matching recommendation for your stack automatically.
 
 ## Contributing
 
@@ -296,3 +283,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md). The governance rule is simple: **every
 - **GitHub:** https://github.com/UmayerK/clanker-code
 - **npm:** https://www.npmjs.com/package/clanker-code
 - **Issues:** https://github.com/UmayerK/clanker-code/issues
+- **Discussions:** https://github.com/UmayerK/clanker-code/discussions

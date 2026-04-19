@@ -5,7 +5,7 @@ triggers: /plan, plan this, before you code, explore then plan, design before, a
 ---
 
 ## Problem
-Jumping to code skips exploration and produces rework. Anthropic's canonical loop is Explore → Plan → Implement → Commit. Skipping Explore + Plan burns tokens and produces wrong-looking patches.
+Jumping to code skips exploration and produces rework. The canonical loop is Explore → Plan → Implement → Commit. Skipping Explore + Plan burns tokens and produces wrong-looking patches.
 
 ## Rule
 - On `/plan <task>` (or any clear planning ask), **enter Plan Mode** — don't edit files.
